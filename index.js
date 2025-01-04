@@ -1,5 +1,9 @@
-import { serve } from "https://deno.land/std/http/server.ts";
-import { encoder } from "https://deno.land/std/encoding/utf8.ts";
+
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+
+//import { serve } from "https://deno.land/std/http/server.ts";
+//import { encoder } from "https://deno.land/std/encoding/utf8.ts";
+const encoder = new TextEncoder();
 
 const readBody = async (req) => {
   const { contentLength } = req;
