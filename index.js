@@ -67,10 +67,29 @@ serve((req) => {
 }, { port: 8000   });
 */
 
-
+/*
 Deno.serve((req) => {
   return new Response("Hello from Deno Deploy with JavaScript!", {
     status: 200,
   });
+});
+*/
+
+
+// Function for handling MITM (Man-in-the-Middle) requests
+/*
+async function mitm(req) {
+  // Handle MITM logic (e.g., proxying the request, inspecting/modifying data)
+  return new Response("MITM proxy request...", { status: 200 });
+}
+*/
+// Main server
+Deno.serve(async (req) => {
+  // Conditionally handle CONNECT and other requests
+  if (req.method === "CONNECT") {
+    return tunnel(req); // Handle CONNECT with tunnel
+  } else {
+    return mitm(req); // Handle other methods with MITM proxy logic
+  }
 });
 
