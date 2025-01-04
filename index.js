@@ -66,16 +66,3 @@ serve((req) => {
   return (req.method === "CONNECT" ? tunnel : mitm)(req);
 }, { port: 8000 , hostname: "0.0.0.0"  });
 
-
-
-    
-
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
-
-serve((req) => {
-  return new Response("Hello, World!");
-}, { port: 8000 });
-
-
-
-    
