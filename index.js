@@ -58,15 +58,24 @@ const tunnel = async (req) => {
     Deno.copy(req.conn, conn).catch(() => null);
     Deno.copy(conn, req.conn).catch(() => null);
   }
-};
+};    
 
-const options = { port: 8080, hostname: "0.0.0.0" };
-const server = serve(options);
-console.log(
-  `HTTP proxy listening on http://${options.hostname}:${options.port}/`,
-);
+ 
+serve((req) => {
+  // Conditional logic based on the HTTP method
+  return (req.method === "CONNECT" ? tunnel : mitm)(req);
+}, { port: 8000 , hostname: "0.0.0.0"  });
 
-for await (const req of server) {
-  (req.method === "CONNECT" ? tunnel : mitm)(req);
-}
 
+
+    
+
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+
+serve((req) => {
+  return new Response("Hello, World!");
+}, { port: 8000 });
+
+
+
+    
