@@ -61,11 +61,12 @@ const tunnel = async (req) => {
 };
 
 const options = { port: 8080, hostname: "0.0.0.0" };
-const s = serve(options);
+const server = serve(options);
 console.log(
   `HTTP proxy listening on http://${options.hostname}:${options.port}/`,
 );
 
-for await (const req of s) {
+for await (const req of server) {
   (req.method === "CONNECT" ? tunnel : mitm)(req);
 }
+
