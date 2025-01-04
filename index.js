@@ -60,9 +60,17 @@ const tunnel = async (req) => {
   }
 };    
 
- 
+ /*
 serve((req) => {
   // Conditional logic based on the HTTP method
   return (req.method === "CONNECT" ? tunnel : mitm)(req);
 }, { port: 8000   });
+*/
+
+
+Deno.serve((req) => {
+  return new Response("Hello from Deno Deploy with JavaScript!", {
+    status: 200,
+  });
+});
 
