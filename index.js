@@ -64,5 +64,5 @@ const tunnel = async (req) => {
 serve((req) => {
   // Conditional logic based on the HTTP method
   return (req.method === "CONNECT" ? tunnel : mitm)(req);
-}, { port: 8000 , hostname: "0.0.0.0"  });
+}, { port: 8000   });
 
